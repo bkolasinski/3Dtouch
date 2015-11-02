@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+		<script>
+		    $(document).bind("mobileinit", function(){
+		        $.event.special.swipe.horizontalDistanceThreshold = 1;
+		        $.event.special.swipe.verticalDistanceThreshold = 1;
+		    });
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		<script src="3Dtouch.js"></script>
+
+		<style>
+			.icon{width: 10vw; height: 10vw; background: blue;}
+			.cloud{opacity: 0; transition: all 0.5s;}
+			.cloud.holdpress{opacity: 1;}
+		</style>
+	</head>
+	<body>
+
+		<div class="cloud">Hello world!</div>
+		<div class="icon 3Dtouch" data-item="cloud"></div>
+<<<<<<< HEAD
+		
+=======
+>>>>>>> test2
+	</body>
+</html>
