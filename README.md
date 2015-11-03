@@ -1,10 +1,11 @@
 # 3Dtouch
 This is a prototype available under the MIT license.
-<br/>
+
 3Dtouch allows the use of twinning to "3D touch" technology using any touch screen, not just in iPhone 6s or iPhone 6s+.
-<br/><br/>
-<a href="http://touch.crabby.pl/" target="_blank">Click here to try demo</a>
-<br/><br/>
+
+
+[Click here to try a demo](http://touch.crabby.pl/)
+
 ## Simple installation:
 
 1. Add jQuery, swipe settings, jQuery mobile and 3Dtouch.js:
