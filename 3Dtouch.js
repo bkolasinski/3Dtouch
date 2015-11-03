@@ -72,7 +72,6 @@
 			    if(d[i]>30) response[i] = 'swipe';
 
 			    if(response[i] != undefined) $('.'+thisitem[i]).addClass('active').addClass(response[i]);
-			    console.log(d);
 			}, false);
 		
 
