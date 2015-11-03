@@ -8,8 +8,7 @@ This is a prototype available under the MIT license.
 
 ## Simple installation:
 
-1. Add jQuery, swipe settings, jQuery mobile and 3Dtouch.js:
-```
+1. Add jQuery, swipe settings, jQuery mobile and 3Dtouch.js: ```
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
     $(document).bind("mobileinit", function(){
@@ -20,13 +19,11 @@ This is a prototype available under the MIT license.
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <script src="3Dtouch.js"></script>
 ```
-2. Add items to your DOM
-```
+2. Add items to your DOM: ```
 <div class="cloud">Hello world!</div>
 <div class="icon 3Dtouch" data-item="cloud"></div>
 ```
-3. Run script
-```
+3. Run script: ```
 $(document).ready(function(){
 	$('.3Dtouch').touch({
 		time:1000
