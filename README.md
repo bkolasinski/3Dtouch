@@ -20,13 +20,11 @@ This is a prototype available under the MIT license.
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <script src="3Dtouch.js"></script>
 ```
-
 2. Add items to your DOM
 ```
 <div class="cloud">Hello world!</div>
 <div class="icon 3Dtouch" data-item="cloud"></div>
 ```
-
 3. Run script
 ```
 $(document).ready(function(){
