@@ -1,4 +1,4 @@
-# 3Dtouch
+# 3Dtouch for each touchscreen
 This is a prototype available under the MIT license.
 
 3Dtouch allows the use of twinning to "3D touch" technology using any touch screen, not just in iPhone 6s or iPhone 6s+.
