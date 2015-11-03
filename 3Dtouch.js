@@ -8,93 +8,112 @@
             time: "600"
         }, options );
 
-		var startX, startY, endX, endY, outStartX, outStartY, outEndX, outEndY, d, x, y, timeStart, timeStop, time, response, timetmp;
+    	var i=0;
+		var startX = new Array();
+		var startY = new Array();
+		var endX = new Array();
+		var endY = new Array();
+		var outStartX = new Array();
+		var outStartY = new Array();
+		var outEndX = new Array();
+		var outEndY = new Array();
+		var d = new Array();
+		var xd = new Array();
+		var yd = new Array();
+		var timeStart = new Array();
+		var timeStop = new Array();
+		var time = new Array();
+		var response = new Array();
+		var timetmp = new Array();
+		var thisitem = new Array();
+		var touch = new Array();
 		var x = document.getElementsByClassName("3Dtouch");
-		var thisitem = $(this).attr('data-item');
-		x[0].addEventListener('touchmove', function(e) {
-		    e.preventDefault();
-		    var touch = e.touches[0];
 
-		    if(startX==undefined) startX = touch.pageX;
-		    if(startY==undefined) startY = touch.pageY;
-		    endX = touch.pageX;
-		    endY = touch.pageY;
+		for (iter = 0; iter < x.length; iter++) {
+			x[iter].className = x[iter].className + ' 3DtouchItem'+iter;
+			$('.3DtouchItem'+iter).attr('data-iter',iter);
+			thisitem[iter] = $('.3DtouchItem'+iter).attr('data-item');
 
-		    if(startX<endX)
-		    {
-		    	outStartX = startX;
-		    	outEndX = endX;
-		    }else{
-		    	outStartX = endX;
-		    	outEndX = startX;
-		    }
-		    if(startY<endY)
-		    {
-		    	outStartY = startY;
-		    	outEndY = endY;
-		    }else{
-		    	outStartY = endY;
-		    	outEndY = startY;
-		    }
+			x[iter].addEventListener('touchmove', function(e) {
+			    e.preventDefault();
+			    touch[i] = e.touches[0];
 
-		    x = outEndX-outStartX;
-		    y = outEndY-outStartY;
-		    d = Math.sqrt((x*x)+(y*y));
+			    if(startX[i]==undefined) startX[i] = touch[i].pageX;
+			    if(startY[i]==undefined) startY[i] = touch[i].pageY;
+			    endX[i] = touch[i].pageX;
+			    endY[i] = touch[i].pageY;
+
+			    if(startX[i]<endX[i])
+			    {
+			    	outStartX[i] = startX[i];
+			    	outEndX[i] = endX[i];
+			    }else{
+			    	outStartX[i] = endX[i];
+			    	outEndX[i] = startX[i];
+			    }
+			    if(startY[i]<endY[i])
+			    {
+			    	outStartY[i] = startY[i];
+			    	outEndY[i] = endY[i];
+			    }else{
+			    	outStartY[i] = endY[i];
+			    	outEndY[i] = startY[i];
+			    }
+
+			    xd[i] = outEndX[i]-outStartX[i];
+			    yd[i] = outEndY[i]-outStartY[i];
+			    d[i] = Math.sqrt((xd[i]*xd[i])+(yd[i]*yd[i]));
 
 
+			    timetmp[i] = (new Date).getTime()-timeStart[i];
 
-		    timetmp = (new Date).getTime()-timeStart;
+			    if(timetmp[i]>300) response[i] = 'hold';
+			    if(timetmp[i]>300 && d[i]>3 && d[i]<30) response[i] = 'holdpress';
+			    if(d[i]>30) response[i] = 'swipe';
 
-		    if(timetmp>300) response = 'hold';
-		    if(timetmp>300 && d>3 && d<30) response = 'holdpress';
-		    if(d>30) response = 'swipe';
+			    if(response[i] != undefined) $('.'+thisitem[i]).addClass('active').addClass(response[i]);
+			    console.log(d);
+			}, false);
+		
 
-		    if(response != undefined) $('.'+thisitem).addClass('active').addClass(response);
+			$('.3Dtouch').on('touchstart',function(){
+				i = $(this).attr('data-iter');
+				timeStart[i] = (new Date).getTime();
+			})
 
-		}, false);
+			$('.3DtouchItem'+i).on('touchend',function(){
+				timeStop[i] = (new Date).getTime();
+				time[i] = timeStop[i] - timeStart[i];
 
-		$(this).on('touchstart',function(){
-			timeStart = (new Date).getTime();
-		})
+				if(time[i]<100) response[i] = 'quicktap';
+				if(time[i]>100 && time[i]<300) response[i] = 'tap';
+				if(time[i]>300) response[i] = 'hold';
 
-		$(this).on('touchend',function(){
-			timeStop = (new Date).getTime();
-			time = timeStop - timeStart;
+				if(response[i] != undefined) $('.'+thisitem[i]).addClass('active').addClass(response[i]);
 
-			if(time<100) response = 'quicktap';
-			if(time>100 && time<300) response = 'tap';
-			if(time>300) response = 'hold';
-
-			if(response != undefined) $('.'+thisitem).addClass('active').addClass(response);
-
-			startX = undefined;
-			startY = undefined;
-			endX = undefined;
-			endY = undefined;
-			outStartX = undefined;
-			outStartY = undefined;
-			outEndX = undefined;
-			outEndY = undefined;
-			d = undefined;
-			x = undefined;
-			y = undefined;
-			timeStart = undefined;
-			timeStop = undefined;
-			time = undefined;
-			response = undefined;
-			timetmp = undefined;
-			if(settings.time>0) setTimeout(
-			  function() 
-			  {
-			    $('.'+thisitem).removeClass('active').removeClass('hold').removeClass('holdpress').removeClass('swipe').removeClass('tap').removeClass('quicktap');
-			  }, settings.time);
-		})
+				startX[i] = undefined;
+				startY[i] = undefined;
+				endX[i] = undefined;
+				endY[i] = undefined;
+				outStartX[i] = undefined;
+				outStartY[i] = undefined;
+				outEndX[i] = undefined;
+				outEndY[i] = undefined;
+				d[i] = undefined;
+				xd[i] = undefined;
+				yd[i] = undefined;
+				timeStart[i] = undefined;
+				timeStop[i] = undefined;
+				time[i] = undefined;
+				response[i] = undefined;
+				timetmp[i] = undefined;
+				if(settings.time>0) setTimeout(
+				  function() 
+				  {
+				    $('.'+thisitem[i]).removeClass('active').removeClass('hold').removeClass('holdpress').removeClass('swipe').removeClass('tap').removeClass('quicktap');
+				  }, settings.time);
+			})
+		}
 	};
- 
+ 	
 }( jQuery ));
-
-$(document).ready(function(){
-	$('.3Dtouch').touch({
-		time:1000
-	});
-})

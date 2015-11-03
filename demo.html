@@ -13,17 +13,26 @@
 		</script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 		<script src="3Dtouch.js"></script>
-
+		<script>
+			$(document).ready(function(){
+				$('.3Dtouch').touch({
+					time:1000
+				});
+			})
+		</script>
 		<style>
 			.icon{width: 50vw; height: 50vw; background: blue;}
-			.cloud{opacity: 0; transition: all 0.5s;}
-			.cloud.holdpress{opacity: 1;}
+			.icon2{width: 50vw; height: 50vw; background: red;}
+			.cloud, .cloud2{opacity: 0; transition: all 0.5s;}
+			.cloud.holdpress, .cloud2.holdpress{opacity: 1;}
 		</style>
 	</head>
 	<body>
 
 		<div class="cloud">Hello world!</div>
 		<div class="icon 3Dtouch" data-item="cloud"></div>
+		<div class="cloud2">Hello user!</div>
+		<div class="icon2 3Dtouch" data-item="cloud2"></div>
 
 	</body>
 </html>
